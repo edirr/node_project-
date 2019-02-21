@@ -1,5 +1,5 @@
 {
-  "name": "vidly",
+  "name": "node_project",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
-    "joi": "^13.7.0"
+    "joi": "^13.7.0",
+    "mongoose": "^5.4.14"
   }
 }

@@ -4,7 +4,7 @@ const customers = require('./routes/customers');
 const express = require('express');
 const app = express();
 
-mongoose.connect('mongodb://localhost/node_app')
+mongoose.connect('mongodb://localhost/node_project')
   .then(() => console.log('Connected to MongoDB...'))
   .catch(err => console.error('Could not connect to MongoDB...'));
 
