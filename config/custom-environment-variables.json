@@ -1,3 +1,4 @@
 {
-    "jwtPrivateKey": "node_project_jwtPrivateKey"
+    "jwtPrivateKey": "node_project_jwtPrivateKey",
+    "db": "node_project_db"
 }
