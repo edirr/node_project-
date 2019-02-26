@@ -1,6 +1,6 @@
 require("express-async-errors");
 const winston = require('winston');
-require('winston-mongodb');
+// require('winston-mongodb');
 const error = require('./middleware/error');
 const config = require('config');
 const Joi = require('joi');
@@ -27,7 +27,7 @@ process.on('unhandledRejection', (ex)=>{
 });
 
 winston.add(winston.transports.File, { filename: 'logfile.log' });
-winston.add(winston.transports.MongoDB, { db: 'mongodb://localhost/node_project' });
+// winston.add(winston.transports.MongoDB, { db: 'mongodb://localhost/node_project' });
 
 // const p = Promise.reject(new Error("BAD BAD FAILED"))
 
@@ -35,8 +35,11 @@ if(!config.get('jwtPrivateKey')){
   throw new Error("FATAL ERROR: jwtPrivateKey is not defined.");
 }
 
-mongoose.connect('mongodb://localhost/node_project', { useNewUrlParser: true})   
-  .then(() => winston.info('Connected to MongoDB...'))
+mongoose.connect(config.get('db'))   
+  .then(() => winston.info(`Connected to ${config.get('db')}...`))
+
+// mongoose.connect('mongodb://localhost/node_project', { useNewUrlParser: true})   
+//   .then(() => winston.info('Connected to MongoDB...'))
   
 
 app.use(express.json());
@@ -50,5 +53,6 @@ app.use('/api/auth', auth);
 app.use(error);
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => winston.info(`Listening on port ${port}...`));
+const server = app.listen(port, () => winston.info(`Listening on port ${port}...`));
 
+module.exports = server;
