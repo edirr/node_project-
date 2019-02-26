@@ -1,3 +1,5 @@
+const helmet = require('helmet');
+const compression = require('compression');
 require("express-async-errors");
 const winston = require('winston');
 // require('winston-mongodb');
@@ -53,6 +55,8 @@ app.use('/api/auth', auth);
 app.use('/api/returns', returns);
 
 app.use(error);
+app.use(helmet());
+app.use(compression());
 
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => winston.info(`Listening on port ${port}...`));
